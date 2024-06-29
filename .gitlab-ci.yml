@@ -1,10 +1,9 @@
-image: node:latest
-
 pages:
   stage: deploy
   script:
     - mkdir .public
-    - echo "<!DOCTYPE html><html><head><title>Hello World</title></head><body><h1>Hello World!</h1></body></html>" > .public/index.html
+    - cp -r web/* .public
+    - mv .public public
   artifacts:
     paths:
       - .public
