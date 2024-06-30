@@ -94,6 +94,70 @@ fig.update_traces(line={'width': 3})
 
 st.plotly_chart(fig, use_container_width=True)
 
+st.subheader("Alfalfa yield")
+
+st.markdown("""
+
+Alfalfa DMY (Dry Matter Yield) was computed using multiple linear regression as:
+
+$DMY= a_1\\;\\varphi_1(t) + a_2\\;\\varphi_2(t) + a_3\\;\\varphi_3(t)$
+
+Where
+
+- $DMY$ is Dry Matter Yield in Tn/Ha
+- $\\varphi_1(t)$ is cumulative rainfall in mm
+- $\\varphi_2(t)$ is final plant height in cm
+- $\\varphi_3(t)$ is cumulative $GDD$ in $^{\circ}$C-day""")
+
+alfa_yield = pd.read_csv("data/yield.csv", sep=",", comment="#")
+
+scatters = go.Scatter3d(
+    x = alfa_yield.GDD,
+    y = alfa_yield.Rainfall,
+    z = alfa_yield.Ha,
+    mode='markers',
+    showlegend=False,
+    marker=dict(
+        size = alfa_yield.DMY*10.5,
+        line = dict(color = "black"),
+        color=alfa_yield.DMY,                # set color to an array/list of desired values
+        colorscale='Blugrn',              # choose a colorscale
+        opacity=0.95, 
+        colorbar=dict(title='DMY [Tn/Ha]', len = 0.5),
+    )
+)
+
+fig = go.Figure(data = [scatters])
+
+fig.update_layout(margin=dict(l=0, r=0, b=0, t=0), template="ggplot2", width=700, height=600)
+
+fig.update_layout(
+    scene=dict(
+        xaxis_title='GDD [ºC * day]',
+        yaxis_title='Rainfall [mm]',
+        zaxis_title='Height [cm]'
+    )
+)
+
+# Rango de ejes
+fig.update_layout(
+    scene=dict(
+        xaxis=dict(range=[100, 700]), # rango eje X = GDD
+        yaxis=dict(range=[-5, 300]),   # rango eje Y = Rainfall
+        zaxis=dict(range=[5, 70]),    # rango eje Z = height
+        aspectratio=dict(x=1.1, y=0.7, z=1)
+    )
+)
+
+fig.update_layout(
+    scene=dict(
+        xaxis=dict(title=dict(font=dict(size=20))),
+        yaxis=dict(title=dict(font=dict(size=20))),
+        zaxis=dict(title=dict(font=dict(size=20))),
+    )
+)
+
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown(
     """
