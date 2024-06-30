@@ -161,9 +161,9 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown(
     """
-### Useful links:
-            
 * [Gitlab repository](https://gitlab.com/emilopez/pyalfalfadynamics)
+* [PyCafe webapp](https://py.cafe/app/emilopez/pyalfalfadynamics)
+* [Streamlit webapp](https://pyalfalfadynamics.streamlit.app/)
 * [Gitlab static app](https://emilopez.gitlab.io/pyalfalfadynamics)
  * Author: [Emiliano López](https://gitlab.com/emilopez/)
 """
