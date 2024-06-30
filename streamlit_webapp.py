@@ -82,6 +82,9 @@ fisher_coef = {"ciclo_a6":[1.575,0.626],
         "ciclo_b7":[2.864,0.834],
         "ciclo_b8":[3.326,1.183]}
 opciones = alfalfa_data.columns[1:-2]
+
+st.markdown("""Each alfalfa growth cycle was fitted using Fisher model:""")
+
 # Crear la lista desplegable
 cycle_op = st.radio('Growth cycle:', opciones, horizontal=True)
 
