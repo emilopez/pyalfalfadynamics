@@ -9,7 +9,7 @@ import model
 alfalfa_data = pd.read_csv("data/cycles_all.dat", sep=";")
 fisher_params = [2.35594909, 0.86735709]
 landau_params = [3.05408611, 1.71316648]
-gompertz_params = [2.24074685, 3.38374238]
+gompertz_params = [2.2560388524572836, 3.5285080544747816]
 
 print("\x1b[1;92mStreamlit script running...\x1b[0m")
 
@@ -26,9 +26,9 @@ data = pd.DataFrame({
     "y_gompertz":model.gompertz(alfalfa_data.tau, *gompertz_params),
 })
 
-rmse_gompertz = 0.033374733520125356
-rmse_landau = 0.019534691782079044
-rmse_fisher = 0.018341609219938593
+rrmse_gompertz = 0.04887656494425247
+rrmse_landau = 0.026585082154547086
+rrmse_fisher = 0.02496139654509409
 
 st.subheader("Fitted models")
 st.markdown(
@@ -42,9 +42,9 @@ The alfalfa growth mean cycle was fitted with the following models:
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(x = data.x, y = data.y_mean, mode="markers", name="y_mean"))
-fig.add_trace(go.Scatter(x = data.x, y = data.y_fisher, mode="lines", name=f"Fisher         | RMSE = {rmse_fisher:.3f}"))
-fig.add_trace(go.Scatter(x = data.x, y = data.y_landau, mode="lines", name=f"Landau      | RMSE = {rmse_landau:.3f}"))
-fig.add_trace(go.Scatter(x = data.x, y = data.y_gompertz, mode="lines", name=f"Gompertz | RMSE = {rmse_gompertz:.3f}"))
+fig.add_trace(go.Scatter(x = data.x, y = data.y_fisher, mode="lines", name=f"Fisher         |% RMSE = {rrmse_fisher:.3f}"))
+fig.add_trace(go.Scatter(x = data.x, y = data.y_landau, mode="lines", name=f"Landau      |% RMSE = {rrmse_landau:.3f}"))
+fig.add_trace(go.Scatter(x = data.x, y = data.y_gompertz, mode="lines", name=f"Gompertz |% RMSE = {rrmse_gompertz:.3f}"))
 fig.update_layout(template="ggplot2", legend=dict(x=0.05, y=0.96, orientation='v'))
 fig.update_layout(font = dict(size=18, color='black'))
 fig.update_traces(line={'width': 3})
