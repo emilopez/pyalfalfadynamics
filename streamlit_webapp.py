@@ -42,9 +42,9 @@ The alfalfa growth mean cycle was fitted with the following models:
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(x = data.x, y = data.y_mean, mode="markers", name="y_mean"))
-fig.add_trace(go.Scatter(x = data.x, y = data.y_fisher, mode="lines", name=f"Fisher         |% RMSE = {rrmse_fisher:.3f}"))
-fig.add_trace(go.Scatter(x = data.x, y = data.y_landau, mode="lines", name=f"Landau      |% RMSE = {rrmse_landau:.3f}"))
-fig.add_trace(go.Scatter(x = data.x, y = data.y_gompertz, mode="lines", name=f"Gompertz |% RMSE = {rrmse_gompertz:.3f}"))
+fig.add_trace(go.Scatter(x = data.x, y = data.y_fisher, mode="lines", name=f"Fisher         |% RMSE = {100*rrmse_fisher:.3f}"))
+fig.add_trace(go.Scatter(x = data.x, y = data.y_landau, mode="lines", name=f"Landau      |% RMSE = {100*rrmse_landau:.3f}"))
+fig.add_trace(go.Scatter(x = data.x, y = data.y_gompertz, mode="lines", name=f"Gompertz |% RMSE = {100*rrmse_gompertz:.3f}"))
 fig.update_layout(template="ggplot2", legend=dict(x=0.05, y=0.96, orientation='v'))
 fig.update_layout(font = dict(size=18, color='black'))
 fig.update_traces(line={'width': 3})
